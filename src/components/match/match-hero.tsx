@@ -31,7 +31,7 @@ function HeroTeam({ side, match, form, position }: { side: "home" | "away"; matc
         </h2>
         <div className={cn("mt-1.5 flex items-center justify-center gap-2 text-xs text-muted-foreground", side === "home" ? "md:justify-end" : "md:justify-start")}>
           {position !== null && <span className="tabular">{position}ᵉ</span>}
-          <FormBadges form={form} size="xs" />
+          <FormBadges form={form} size="xs" className="hidden sm:inline-flex" />
         </div>
       </div>
       <div className="relative md:order-2">
