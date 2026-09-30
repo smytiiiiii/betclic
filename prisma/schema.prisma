@@ -1,0 +1,63 @@
+// Schéma PostgreSQL (optionnel). Activé lorsque DATABASE_URL est défini.
+// Génération du client : npm run db:generate — Migrations : npm run db:migrate
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model AppSettings {
+  id        Int      @id @default(1)
+  data      Json
+  updatedAt DateTime @updatedAt
+
+  @@map("app_settings")
+}
+
+enum BetStatus {
+  pending
+  won
+  lost
+  void
+}
+
+model Bet {
+  id               String    @id @default(uuid())
+  createdAt        DateTime  @default(now())
+  placedAt         DateTime
+  matchId          String?
+  matchLabel       String
+  competition      String?
+  marketKey        String?
+  selection        String
+  odds             Decimal   @db.Decimal(10, 3)
+  stake            Decimal   @db.Decimal(14, 2)
+  status           BetStatus @default(pending)
+  modelProbability Decimal?  @db.Decimal(6, 5)
+  notes            String?
+  settledAt        DateTime?
+
+  @@index([placedAt])
+  @@map("bets")
+}
+
+enum TransactionType {
+  deposit
+  withdrawal
+}
+
+model BankrollTransaction {
+  id        String          @id @default(uuid())
+  createdAt DateTime        @default(now())
+  date      DateTime
+  type      TransactionType
+  amount    Decimal         @db.Decimal(14, 2)
+  note      String?
+
+  @@index([date])
+  @@map("bankroll_transactions")
+}

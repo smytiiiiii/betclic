@@ -1,0 +1,258 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------------------
+   Kairos — design tokens
+   Thème sombre par défaut ; thème clair via .light ; « système » via .system
+   --------------------------------------------------------------------------- */
+
+:root,
+.dark {
+  color-scheme: dark;
+  --background: #07090a;
+  --surface: #0c0f11;
+  --surface-2: #111518;
+  --surface-3: #171c20;
+  --border: #1c2227;
+  --border-strong: #273037;
+  --foreground: #edf1f3;
+  --muted-foreground: #8d99a4;
+  --subtle-foreground: #5e6a74;
+
+  --primary: #3ce39b;
+  --primary-strong: #22c983;
+  --primary-foreground: #03140c;
+  --primary-soft: rgb(60 227 155 / 0.1);
+  --primary-ring: rgb(60 227 155 / 0.35);
+
+  --positive: #3ce39b;
+  --negative: #ff6166;
+  --warning: #f7b538;
+  --info: #5aa6ff;
+  --live: #ff4757;
+
+  /* Séries de données (palette validée CVD, variante sombre) */
+  --home: #3987e5;
+  --away: #d95926;
+  --draw: #7f8790;
+  --series-3: #199e70;
+  --series-4: #c98500;
+
+  --grid: #1a2025;
+  --shadow: 0 1px 0 rgb(255 255 255 / 0.03) inset, 0 12px 32px -16px rgb(0 0 0 / 0.6);
+  --glow: radial-gradient(1200px 400px at 10% -10%, rgb(60 227 155 / 0.07), transparent 60%),
+    radial-gradient(900px 400px at 110% 0%, rgb(57 135 229 / 0.06), transparent 60%);
+}
+
+.light {
+  color-scheme: light;
+  --background: #f4f6f7;
+  --surface: #ffffff;
+  --surface-2: #f3f5f7;
+  --surface-3: #e9edf0;
+  --border: #e2e7eb;
+  --border-strong: #cfd6dc;
+  --foreground: #0c1115;
+  --muted-foreground: #56626c;
+  --subtle-foreground: #86919a;
+
+  --primary: #0e9f63;
+  --primary-strong: #0b8753;
+  --primary-foreground: #ffffff;
+  --primary-soft: rgb(14 159 99 / 0.1);
+  --primary-ring: rgb(14 159 99 / 0.3);
+
+  --positive: #0b8a55;
+  --negative: #d83a3f;
+  --warning: #b77800;
+  --info: #2a6fd6;
+  --live: #e0293b;
+
+  --home: #2a78d6;
+  --away: #eb6834;
+  --draw: #8c9199;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+
+  --grid: #e8ecef;
+  --shadow: 0 1px 2px rgb(16 24 32 / 0.04), 0 8px 24px -12px rgb(16 24 32 / 0.12);
+  --glow: radial-gradient(1200px 400px at 10% -10%, rgb(14 159 99 / 0.06), transparent 60%);
+}
+
+@media (prefers-color-scheme: light) {
+  .system {
+    color-scheme: light;
+    --background: #f4f6f7;
+    --surface: #ffffff;
+    --surface-2: #f3f5f7;
+    --surface-3: #e9edf0;
+    --border: #e2e7eb;
+    --border-strong: #cfd6dc;
+    --foreground: #0c1115;
+    --muted-foreground: #56626c;
+    --subtle-foreground: #86919a;
+    --primary: #0e9f63;
+    --primary-strong: #0b8753;
+    --primary-foreground: #ffffff;
+    --primary-soft: rgb(14 159 99 / 0.1);
+    --primary-ring: rgb(14 159 99 / 0.3);
+    --positive: #0b8a55;
+    --negative: #d83a3f;
+    --warning: #b77800;
+    --info: #2a6fd6;
+    --live: #e0293b;
+    --home: #2a78d6;
+    --away: #eb6834;
+    --draw: #8c9199;
+    --series-3: #1baf7a;
+    --series-4: #eda100;
+    --grid: #e8ecef;
+    --shadow: 0 1px 2px rgb(16 24 32 / 0.04), 0 8px 24px -12px rgb(16 24 32 / 0.12);
+    --glow: radial-gradient(1200px 400px at 10% -10%, rgb(14 159 99 / 0.06), transparent 60%);
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-subtle-foreground: var(--subtle-foreground);
+  --color-primary: var(--primary);
+  --color-primary-strong: var(--primary-strong);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
+  --color-positive: var(--positive);
+  --color-negative: var(--negative);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
+  --color-live: var(--live);
+  --color-home: var(--home);
+  --color-away: var(--away);
+  --color-draw: var(--draw);
+  --color-series-3: var(--series-3);
+  --color-series-4: var(--series-4);
+  --color-ring: var(--primary-ring);
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  --shadow-card: var(--shadow);
+
+  --animate-pulse-live: pulse-live 1.6s ease-in-out infinite;
+  --animate-shimmer: shimmer 1.8s linear infinite;
+
+  @keyframes pulse-live {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.35;
+      transform: scale(0.8);
+    }
+  }
+
+  @keyframes shimmer {
+    from {
+      background-position: -200% 0;
+    }
+    to {
+      background-position: 200% 0;
+    }
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--background);
+    background-image: var(--glow);
+    background-attachment: fixed;
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: var(--primary-soft);
+    color: var(--foreground);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--primary-ring);
+    outline-offset: 2px;
+  }
+
+  /* Barres de défilement discrètes */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-strong) transparent;
+  }
+}
+
+@layer utilities {
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .skeleton {
+    background: linear-gradient(90deg, var(--surface-2) 0%, var(--surface-3) 50%, var(--surface-2) 100%);
+    background-size: 200% 100%;
+    animation: var(--animate-shimmer);
+  }
+
+  .card-surface {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+  }
+
+  .hairline-grid {
+    background-image: linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
